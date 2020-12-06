@@ -1,0 +1,1 @@
+export {BASE_URL as BASE_URL} from './constants';
