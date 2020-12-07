@@ -45,6 +45,7 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [user, setUser] = useContext(UserContext);
+
   return (
     <div>
       <GridContainer>
@@ -56,7 +57,7 @@ export default function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Used Space</p>
               <h3 className={classes.cardTitle}>
-                {user && user.uid} <small>GB</small>
+                {user && user.uid} <small>{user && user.dbData.clienti}</small>
               </h3>
             </CardHeader>
             <CardFooter stats>

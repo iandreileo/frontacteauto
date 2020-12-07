@@ -8,18 +8,24 @@ const UserProvider  = (props) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    //component did mount
-    auth.onAuthStateChanged(async (us) => {
-      // backendAuth(us.uid).then(res => console.log("res" + res));
+    auth.onAuthStateChanged( async (us) => {
       if(us !== null) {
-        console.log(backendAuth(us.uid));
+        auth.currentUser.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
+          // Send token to your backend via HTTPS
+          var currentUser = await backendAuth(idToken);
+          let merged = {...us, ...currentUser};
+          setUser(merged); 
+          console.log(user);
+          console.log(idToken);
+          // ...
+        }).catch(function(error) {
+          // Handle error
+        });
       }
-      setUser(us); 
-      // console.log(us)
     });
 
 
-  });
+  }, [setUser]);
 
   return (
     <UserContext.Provider value={[user, setUser]}>{props.children}</UserContext.Provider>

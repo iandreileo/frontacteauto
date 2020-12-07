@@ -90,7 +90,7 @@ export default function Admin({ ...rest }) {
       };
     }
 
-  }, [mainPanel, user]);
+  }, [mainPanel]);
 
   if (redirect) {
     return <Redirect to={redirect} />;

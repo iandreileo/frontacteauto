@@ -51,7 +51,7 @@ export const App = () => {
 export const MainComponent = () => {
   const [ spinner, setSpinner ] = React.useState(true);
   useEffect(() => {
-    setTimeout(() => setSpinner(false), 500)
+    setTimeout(() => setSpinner(false), 800)
   }, []);
   return (
     <UserProvider>
