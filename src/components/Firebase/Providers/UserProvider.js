@@ -15,8 +15,6 @@ const UserProvider  = (props) => {
           var currentUser = await backendAuth(idToken);
           let merged = {...us, ...currentUser};
           setUser(merged); 
-          console.log(user);
-          console.log(idToken);
           // ...
         }).catch(function(error) {
           // Handle error
