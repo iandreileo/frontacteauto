@@ -1,5 +1,4 @@
 import {BASE_URL} from '../constants';
-import axios from 'axios';
 
 
 export const backendAuth = async (uid) => {

@@ -1,10 +1,27 @@
 import React, {useState, createContext} from 'react';
 
-export const personalDataContext = createContext();
+export const sellerDataContext = createContext();
+export const buyerDataContext = createContext();
 export const vehicleDataContext = createContext();
 
 export const DataProvider = (props) => {
-    const [personalData, setPersonalData] = useState({
+    const [sellerData, setSellerData] = useState({
+        "name" : "",
+        "cnp" : "",
+        "location" : "",
+        "street": "",
+        "nr" : "",
+        "bl" : "",
+        "sc" : "",
+        "et" : "",
+        "ap" : "",
+        "county" : "",
+        "email" : "",
+        "tel" : ""
+
+    });
+
+    const [buyerData, setBuyerData] = useState({
         "name" : "",
         "cnp" : "",
         "location" : "",
@@ -33,9 +50,11 @@ export const DataProvider = (props) => {
 
     return (
         <vehicleDataContext.Provider value ={[vehicleData, setVehicleData]}>
-            <personalDataContext.Provider value={[personalData, setPersonalData]}>
-                {props.children}
-            </personalDataContext.Provider>  
+            <sellerDataContext.Provider value={[sellerData, setSellerData]}>
+                <buyerDataContext.Provider value={[buyerData, setBuyerData]}>
+                    {props.children}
+                </buyerDataContext.Provider>
+            </sellerDataContext.Provider>  
         </vehicleDataContext.Provider>
 
     );

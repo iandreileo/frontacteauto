@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [redirect, setredirect] = useState(null);
 
 

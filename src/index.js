@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
@@ -27,7 +27,6 @@ import "assets/css/material-dashboard-react.css?v=1.9.0";
 
 import { DataProvider } from "components/DataProvider/DataProvider";
 import UserProvider from "components/Firebase/Providers/UserProvider";
-import { UserContext } from "components/Firebase/Providers/UserProvider";
 import Login from "components/Firebase/Login";
 import { CircularProgress } from "@material-ui/core";
 import styles from 'assets/css/Main.module.css';
@@ -51,7 +50,7 @@ export const App = () => {
 export const MainComponent = () => {
   const [ spinner, setSpinner ] = React.useState(true);
   useEffect(() => {
-    setTimeout(() => setSpinner(false), 800)
+    setTimeout(() => setSpinner(false), 1000)
   }, []);
   return (
     <UserProvider>

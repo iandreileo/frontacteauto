@@ -26,11 +26,7 @@ import Notifications from "@material-ui/icons/Notifications";
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import ListaDocumente from "views/ListaDocumente/ListaDocumente.js";
-import Typography from "views/Typography/Typography.js";
-import Icons from "views/Icons/Icons.js";
-import Maps from "views/Maps/Maps.js";
-import NotificationsPage from "views/Notifications/Notifications.js";
-import Login from "components/Firebase/Login";
+
 
 // core components/views for RTL layout
 
@@ -45,14 +41,6 @@ const dashboardRoutes = [
     layout: "/acte"
   },
   {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: UserProfile,
-    layout: "/acte"
-  },
-  {
     path: "/acte",
     name: "Acte disponibile",
     rtlName: "قائمة الجدول",
@@ -61,45 +49,13 @@ const dashboardRoutes = [
     layout: "/acte"
   },
   {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-    component: Typography,
+    path: "/setari",
+    name: "Setari",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: Person,
+    component: UserProfile,
     layout: "/acte"
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/acte"
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: LocationOn,
-    component: Maps,
-    layout: "/acte"
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/acte"
-  },
-  // {
-  //   path: "/landing",
-  //   name: "LandingPage",
-  //   rtlName: "إخطارات",
-  //   icon: Notifications,
-  //   component: Login,
-  //   layout: "/login"
-  // }
+  }
 ];
 
 export default dashboardRoutes;

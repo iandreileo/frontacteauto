@@ -254,6 +254,10 @@ footer ul li a:hover {
   .badge-primary-background-color: #9c27b0;
 }
 
+input {
+  width: 100%;
+}
+
 .fixed-plugin .SocialMediaShareButton,
 .fixed-plugin .github-btn {
   display: inline-block;
