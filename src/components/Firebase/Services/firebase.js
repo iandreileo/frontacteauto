@@ -1,9 +1,6 @@
 // firebase.utils.js
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { useContext } from 'react';
-import {backendAuth} from '../../../api';
-import { UserContext } from '../Providers/UserProvider';
 
 const config = {
   apiKey: "AIzaSyAYFhDv2sQ2N4MR7R7cXTIWuufW4Nli0EU",
@@ -24,6 +21,7 @@ export const signInWithGoogle = () => {
     
     return true;
   }).catch((error) => {
+    console.error(error);
     return false;
   })
 }

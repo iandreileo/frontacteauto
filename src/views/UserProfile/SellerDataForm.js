@@ -17,15 +17,17 @@ import { sellerDataContext } from "components/DataProvider/DataProvider";
 import { buyerDataContext } from "components/DataProvider/DataProvider";
 import { vehicleDataContext } from "components/DataProvider/DataProvider";
 import { CLEAR_DATA } from "constants/constants";
+import { fieldsContext } from "components/DataProvider/DataProvider";
 
 
 const useStyles = makeStyles(styles);
 
-export default function SellerDataForm() {
+export default function NewSellerDataForm() {
   const classes = useStyles();
   const [sellerData, setSellerData] = useContext(sellerDataContext);
+  const [{sellerFields}] = useContext(fieldsContext);
+
   useEffect(() => {
-    console.log(sellerData);
   }, [])
 
 const handleOnChange = (e) => {
@@ -48,194 +50,29 @@ const resetData = () => {
               <p className={classes.cardCategoryWhite}>Complete your profile</p>
             </CardHeader>
             <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Nume si prenume complet"
-                    id="name"
-                    value={sellerData.name}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.name,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="CNP"
-                    id="cnp"
-                    value={sellerData.cnp}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.cnp,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (localitatea)"
-                    id="location"
-                    value={sellerData.location}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.location,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (Strada)"
-                    id="street"
-                    value={sellerData.street}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.street,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Domiciliu (Numarul Strazii)"
-                    id="nr"
-                    value={sellerData.nr}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.nr,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (Bloc)"
-                    id="bl"
-                    value={sellerData.bl}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.bl,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (Scara)"
-                    id="sc"
-                    value={sellerData.sc}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.sc,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (Etaj)"
-                    id="et"
-                    value={sellerData.et}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.et,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Domiciliu (Apartament)"
-                    id="ap"
-                    value={sellerData.ap}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.ap,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Domiciliu (Judet)"
-                    id="county"
-                    value={sellerData.county}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.county,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Email"
-                    id="email"
-                    value={sellerData.email}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.email,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                    labelText="Telefon"
-                    id="tel"
-                    value={sellerData.tel}
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      onChange: handleOnChange,
-                      type: "text",
-                      value: sellerData.tel,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
+            <GridContainer>
+                {
+                    sellerFields && sellerFields.map((item, index) => {
+                        return (
+                            <GridItem xs={12} sm={12} md={3} key={index}>
+                                <CustomInput
+                                labelText={item.labelText}
+                                id={item.id}
+                                value={sellerData[item.id]}
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{
+                                    onChange: handleOnChange,
+                                    type: "text",
+                                    value: sellerData[item.id],
+                                }}
+                                />
+                          </GridItem>
+                        );
+                    })
+                }
+                </GridContainer>
             </CardBody>
             <CardFooter style={{textAlign : "center"}}>
               <Button color="primary" onClick={resetData}>Reseteaza Date</Button>

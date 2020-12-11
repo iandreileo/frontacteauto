@@ -3,6 +3,7 @@ import React, {useState, createContext} from 'react';
 export const sellerDataContext = createContext();
 export const buyerDataContext = createContext();
 export const vehicleDataContext = createContext();
+export const fieldsContext = createContext();
 
 export const DataProvider = (props) => {
     const [sellerData, setSellerData] = useState({
@@ -46,18 +47,19 @@ export const DataProvider = (props) => {
         "buyName" : "",
         "buyType" : ""
     });
-
+    const [fields, setFields] = useState({});
 
     return (
         <vehicleDataContext.Provider value ={[vehicleData, setVehicleData]}>
             <sellerDataContext.Provider value={[sellerData, setSellerData]}>
                 <buyerDataContext.Provider value={[buyerData, setBuyerData]}>
-                    {props.children}
+                    <fieldsContext.Provider value={[fields, setFields]}>
+                        {props.children}
+                    </fieldsContext.Provider>
                 </buyerDataContext.Provider>
             </sellerDataContext.Provider>  
         </vehicleDataContext.Provider>
 
     );
-    // personalData={[personalData,setPersonalData]} vehicleData={[vehicleData, setVehicleData]}
 }
 

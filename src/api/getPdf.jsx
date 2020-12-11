@@ -2,11 +2,16 @@ import {BASE_URL} from '../constants';
 import axios from 'axios';
 
 
-export const getPdf = async (vehicleData, personalData) => {
+export const getPdf = async (sellerData, buyerData, vehicleData, name, id) => {
 
     axios.get(`${BASE_URL}/documentdownload`, {responseType: 'blob', params : {
-        personalData : personalData,
-        vehicleData: vehicleData
+        sellerData : sellerData,
+        buyerData: buyerData,
+        vehicleData: vehicleData,
+        documentData: {
+            documentName: name,
+            documentId: id
+        }
     }})
         .then(res => {
             //Create a Blob from the PDF Stream
@@ -16,6 +21,6 @@ export const getPdf = async (vehicleData, personalData) => {
             //Build a URL from the file
             const fileURL = URL.createObjectURL(file);
             //Open the URL on new Window
-            window.open(fileURL);
+            window.open(fileURL); 
         });
 }

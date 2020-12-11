@@ -20,17 +20,19 @@ import SellerDataForm from "./SellerDataForm";
 import BuyerDataForm from "./BuyerDataForm";
 import VehicleDataForm from "./VehicleDataForm";
 import OtherDataForm from "./OtherDataForm";
+import { fieldsContext } from "components/DataProvider/DataProvider";
+
 
 
 const useStyles = makeStyles(styles);
 
 export default function DataForms({page, _id}) {
   const classes = useStyles();
-  const [sellerData, setSellerData] = useContext(sellerDataContext);
-  const [buyerData, setBuyerData] = useContext(buyerDataContext);
-  const [vehicleData, setVehicleData] = useContext(vehicleDataContext);
+  
+  const [fields] = useContext(fieldsContext);
+
   const [documentName, id] = _id.split("_");
-  console.log(documentName, id);
+  console.log(documentName, id, fields);
 
 
 
@@ -39,15 +41,20 @@ export default function DataForms({page, _id}) {
   return (
     <div>
         <GridContainer>
+          {
+            Object.keys(fields).length === 0 ? <p>Te rugam sa selectezi intai un document pe care vrei sa il generezi.</p> :
+            <>
             <SellerDataForm />
             <VehicleDataForm />
             {
             documentName.includes("Contract") || documentName.includes("contract") ?
-            <BuyerDataForm /> : null
+            <BuyerDataForm /> : null}
+                    {
+            page === "GenereazaDocument" ? <OtherDataForm documentName={documentName} _id={id}/> : null
         }
-        {
-            page === "GenereazaDocument" ? <OtherDataForm /> : null
-        }
+            </>
+          }
+
         </GridContainer>
     </div>
   );

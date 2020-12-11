@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -12,6 +12,7 @@ import styles from "./styles";
 import {getDocumente, getDosare} from "../../api";
 import Button from "components/CustomButtons/Button.js";
 import {Link} from "react-router-dom";
+import { fieldsContext } from "components/DataProvider/DataProvider";
 
 
 const useStyles = makeStyles(styles);
@@ -22,6 +23,15 @@ export default function TableList() {
   const [cereri, setCereri] = useState([]);
   const [contracte, setContracte] = useState([]);
 
+  const [fields, setFields] = useContext(fieldsContext);
+
+  const setDocument = (buyer, seller, vehicle) => {
+    setFields({
+      "buyerFields" : buyer,
+      "sellerFields" : seller,
+      "vehicleFields" : vehicle
+    })
+  }
 
   useEffect( () => {
 
@@ -32,7 +42,7 @@ export default function TableList() {
           document._id+1,
           document.name,
           <Link to={`/acte/genereaza/document/${document.name}_${document._id}`}>
-            <Button color="primary">
+            <Button color="primary" onClick={() => setDocument(document.buyerFields, document.sellerFields, document.vehicleFields)}>
               Genereaza
             </Button>
           </Link>
@@ -46,7 +56,7 @@ export default function TableList() {
           document._id+1,
           document.name,
           <Link to={`/acte/genereaza/document/${document.name}_${document._id}`}>
-            <Button color="primary">
+            <Button color="primary" onClick={() => setDocument(document.buyerFields, document.sellerFields, document.vehicleFields)}>
               Genereaza
             </Button>
           </Link>

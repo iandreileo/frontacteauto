@@ -17,6 +17,7 @@ import { sellerDataContext } from "components/DataProvider/DataProvider";
 import { buyerDataContext } from "components/DataProvider/DataProvider";
 import { vehicleDataContext } from "components/DataProvider/DataProvider";
 import { CLEAR_DATA } from "constants/constants";
+import { fieldsContext } from "components/DataProvider/DataProvider";
 
 
 const useStyles = makeStyles(styles);
@@ -24,7 +25,7 @@ const useStyles = makeStyles(styles);
 export default function VehicleDataForm() {
   const classes = useStyles();
   const [vehicleData, setVehicleData] = useContext(vehicleDataContext);
-
+  const [{vehicleFields}] = useContext(fieldsContext);
 
   const handleOnChange = (e) => {
     const targetKey = e.target.id;
@@ -44,137 +45,33 @@ const resetData = () => {
     <GridItem xs={12} sm={12} md={12}>
     <Card>
       <CardHeader color="primary">
-        <h4 className={classes.cardTitleWhite}>Date Vanzator / Proprietar</h4>
+        <h4 className={classes.cardTitleWhite}>Date Vehicul</h4>
         <p className={classes.cardCategoryWhite}>Complete your profile</p>
       </CardHeader>
       <CardBody>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={3}>
-            <CustomInput
-              labelText="Marca vehicul"
-              id="mark"
-              value={vehicleData.mark}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.mark,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Tipul vehiculului"
-              id="type"
-              value={vehicleData.type}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.type,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Seria de sasiu (VIN)"
-              id="vin"
-              value={vehicleData.vin}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.vin,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Anul fabricatiei"
-              id="year"
-              value={vehicleData.year}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.year,
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Numar de inmatriculare"
-              id="platesNumber"
-              value={vehicleData.platesNumber}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.platesNumber,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Data achizitiei"
-              id="buyDate"
-              value={vehicleData.buyDate}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.buyDate,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Vanzator"
-              id="buyName"
-              value={vehicleData.buyName}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.buyName,
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <CustomInput
-              labelText="Tipul achizitiei"
-              id="buyType"
-              value={vehicleData.buyType}
-              formControlProps={{
-                fullWidth: true
-              }}
-              inputProps={{
-                onChange: handleOnChange,
-                type: "text",
-                value: vehicleData.buyType,
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-
-
+          {
+            vehicleFields && vehicleFields.map((item, index) => {
+              return (
+                <GridItem xs={12} sm={12} md={3} key={index}>
+                  <CustomInput
+                    labelText={item.labelText}
+                    id={item.id}
+                    value={vehicleData[item.id]}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    inputProps={{
+                      onChange: handleOnChange,
+                      type: "text",
+                      value: vehicleData[item.id],
+                    }}
+                  />
+                </GridItem>
+              );
+            })
+          }
+          </GridContainer>
       </CardBody>
       <CardFooter style={{textAlign : "center"}}>
         <Button color="primary" onClick={resetData}>Reseteaza Date</Button>

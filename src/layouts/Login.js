@@ -1,28 +1,22 @@
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
-import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Navbar from "components/Navbars/Navbar.js";
 import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+
 
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
-import logo from "assets/img/reactlogo.png";
-import GenereazaDocument from "views/GenereazaDocument/GenereazaDocument";
+
 import { UserContext } from "components/Firebase/Providers/UserProvider";
 
 //login firebase
-import { signInWithGoogle } from '../components/Firebase/Services/firebase';
-import { auth } from '../components/Firebase/Services/firebase';
 import Login from "components/Firebase/Login";
 
 let ps;
@@ -41,10 +35,6 @@ const switchRoutes = (
       }
       return null;
     })}
-    {/* <Route path={`/acte/genereaza/document/:id`} component={GenereazaDocument} /> */}
-
-    {/* {user === null ? <Redirect to="/acte/" /> : <Redirect from="/" to="/acte/panou" />} */}
-    {/* <Redirect from="/acte" to="/acte/panou" /> */}
   </Switch>
 );
 
